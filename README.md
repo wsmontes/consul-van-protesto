@@ -25,19 +25,25 @@ npm run check
 
 - `index.html` — página principal
 - `styles.css` — identidade visual e responsividade
-- `js/complaints.js` — validação, normalização, filtro e storage dos relatos
+- `js/complaints.js` — validação, normalização e filtro dos relatos
+- `js/supabase.js` — cliente REST do Supabase para envio e leitura pública
 - `js/app.js` — integração da interface
+- `supabase/schema.sql` — referência reproduzível da tabela, grants, RLS e políticas
 - `privacidade.html` — política de privacidade
 - `termos.html` — termos de uso
 - `contato.html` — contato e transparência
 - `tests/` — testes automatizados com o runner nativo do Node
 
-## Relatos nesta versão
+## Backend dos relatos
 
-O formulário funciona como **prévia local**: relatos são armazenados apenas no `localStorage` do navegador do visitante. Nada é enviado ou publicado.
+O formulário usa Supabase como base central. Cada envio entra na tabela `public.complaints` com status `pending`.
 
-Isso é intencional. A publicação comunitária real deverá entrar junto com backend, moderação e regras claras de privacidade, em vez de fingir que um site estático possui uma base comunitária que ainda não existe.
+A publicação é moderada: visitantes anônimos conseguem inserir relatos, mas a leitura pública só retorna registros com status `approved`. A consulta pública também não recebe acesso às colunas de nome completo e e-mail.
+
+Para aprovar um relato nesta fase inicial, altere o campo `status` no painel do Supabase de `pending` para `approved`. Na próxima carga da página, o relato aparece automaticamente na área da comunidade.
+
+O frontend usa apenas uma **publishable key**, própria para código público. Nenhuma secret key ou `service_role` deve ser adicionada ao repositório ou ao navegador.
 
 ## Publicação
 
-Como o projeto é estático, pode ser hospedado diretamente em GitHub Pages, Cloudflare Pages, Netlify ou serviço equivalente.
+O frontend continua estático e pode ser hospedado diretamente em GitHub Pages, Cloudflare Pages, Netlify, Hostinger ou serviço equivalente. O backend permanece no Supabase.
