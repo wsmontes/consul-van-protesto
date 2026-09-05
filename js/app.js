@@ -24,6 +24,12 @@ const waitLabels = {
   '3-mais-meses': '+3 meses',
 };
 
+const fieldLabels = {
+  service: 'serviço',
+  description: 'descrição',
+  email: 'e-mail',
+};
+
 const form = document.querySelector('#complaint-form');
 const list = document.querySelector('#complaints-list');
 const emptyState = document.querySelector('#empty-state');
@@ -71,8 +77,8 @@ if (form) {
     const result = validateComplaint(values);
 
     if (!result.valid) {
-      const labels = result.errors.map((field) => field === 'service' ? 'serviço' : 'descrição').join(' e ');
-      formError.textContent = `Faltou preencher ${labels}. Desta vez, a pendência é real e está claramente indicada.`;
+      const labels = result.errors.map((field) => fieldLabels[field] || field).join(' e ');
+      formError.textContent = `Revise ${labels}. Desta vez, a pendência é real e está claramente indicada.`;
       formError.hidden = false;
       form.querySelector(`[name="${result.errors[0]}"]`)?.focus();
       return;
