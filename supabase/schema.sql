@@ -22,7 +22,7 @@ revoke all on table public.complaints from anon, authenticated;
 grant insert (protocol, name, email, display_name, service, incident_date, description, wait_time, resolved, rating, consent)
   on table public.complaints to anon;
 
-grant select (protocol, display_name, service, incident_date, description, wait_time, resolved, rating, created_at)
+grant select (protocol, display_name, service, incident_date, description, wait_time, resolved, rating, status, created_at)
   on table public.complaints to anon;
 
 create policy "anonymous visitors can submit pending complaints"
