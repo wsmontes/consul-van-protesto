@@ -31,6 +31,48 @@ export function normalizeComplaint(input = {}, protocol) {
   };
 }
 
+function escapeComplaintHtml(value = '') {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
+
+function renderComplaintInline(value = '') {
+  return escapeComplaintHtml(value).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>');
+}
+
+export function formatComplaintDescription(value = '') {
+  const normalized = String(value ?? '').replace(/\r\n?/g, '\n').trim();
+  if (!normalized) return { title: '', paragraphs: [] };
+
+  const blocks = normalized.split(/\n\s*\n/).map((block) => block.trim()).filter(Boolean);
+  let title = '';
+
+  if (blocks.length) {
+    const firstLines = blocks[0].split('\n');
+    const firstLine = firstLines[0].trim();
+    const unwrapped = firstLine.match(/^\*\*(.*)\*\*$/)?.[1] ?? firstLine;
+    const titleMatch = unwrapped.match(/^Título:\s*(.+)$/i);
+
+    if (titleMatch) {
+      title = escapeComplaintHtml(titleMatch[1].replaceAll('**', '').trim());
+      const remainder = firstLines.slice(1).join('\n').trim();
+      if (remainder) blocks[0] = remainder;
+      else blocks.shift();
+    }
+  }
+
+  const paragraphs = blocks.map((block) => block
+    .split('\n')
+    .map((line) => renderComplaintInline(line.trim()))
+    .join('<br>'));
+
+  return { title, paragraphs };
+}
+
 export function filterComplaints(items = [], service = 'todos') {
   if (!service || service === 'todos') return [...items];
   return items.filter((item) => item.service === service);
