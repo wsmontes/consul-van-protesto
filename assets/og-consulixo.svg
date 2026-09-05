@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Consulixo do Brasil em Vancouver</title>
+  <desc id="desc">Relatos reais, ironia necessária. Uma sátira independente sobre burocracia consular em Vancouver.</desc>
+  <defs>
+    <pattern id="paper" width="26" height="26" patternUnits="userSpaceOnUse">
+      <rect width="26" height="26" fill="#f5f1e7"/>
+      <path d="M0 25.5H26M25.5 0V26" stroke="#101713" stroke-opacity=".035"/>
+      <circle cx="5" cy="7" r=".7" fill="#101713" opacity=".08"/>
+      <circle cx="19" cy="18" r=".6" fill="#101713" opacity=".07"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="9" dy="9" stdDeviation="0" flood-color="#101713" flood-opacity=".18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#paper)"/>
+  <rect x="0" y="0" width="1200" height="24" fill="#f2d52e"/>
+  <rect x="0" y="606" width="1200" height="24" fill="#0d6b3a"/>
+
+  <path d="M610 380 690 276l55 61 72-112 87 102 61-74 116 127Z" fill="#173f8f" opacity=".18"/>
+  <path d="M600 410 672 338l52 54 60-86 70 82 55-55 93 77Z" fill="#0d6b3a" opacity=".22"/>
+
+  <g transform="translate(64 66) rotate(-2 430 135)">
+    <rect width="840" height="270" rx="6" fill="#fffdf7" stroke="#101713" stroke-width="5" filter="url(#shadow)"/>
+    <rect x="22" y="22" width="796" height="226" rx="2" fill="none" stroke="#0d6b3a" stroke-width="9" stroke-dasharray="17 8"/>
+    <rect x="510" y="47" width="250" height="91" fill="#f2d52e" opacity=".95"/>
+    <text x="55" y="125" font-family="Arial,Helvetica,sans-serif" font-size="100" font-weight="900" letter-spacing="-6" fill="#101713">CONSUL</text>
+    <text x="520" y="125" font-family="Arial,Helvetica,sans-serif" font-size="100" font-weight="900" letter-spacing="-6" fill="#101713">IXO</text>
+    <text x="55" y="201" font-family="Arial,Helvetica,sans-serif" font-size="47" font-weight="900" letter-spacing="-2" fill="#173f8f">DO BRASIL EM VANCOUVER</text>
+  </g>
+
+  <g transform="translate(72 382)">
+    <text x="0" y="0" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="900" fill="#101713">MESMA BUROCRACIA.</text>
+    <text x="0" y="49" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="900" fill="#101713">NOVAS PAISAGENS.</text>
+    <text x="0" y="98" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="900" fill="#101713">MENOS RESPOSTAS.</text>
+    <rect x="-8" y="120" width="430" height="8" fill="#f2d52e"/>
+  </g>
+
+  <g transform="translate(760 316) rotate(2)">
+    <rect x="44" y="20" width="306" height="235" rx="3" fill="#dcd4c5" stroke="#101713" stroke-width="4" transform="rotate(5 197 137)"/>
+    <rect x="22" y="10" width="306" height="235" rx="3" fill="#ebe4d6" stroke="#101713" stroke-width="4" transform="rotate(-3 175 127)"/>
+    <rect width="306" height="235" rx="3" fill="#fffdf7" stroke="#101713" stroke-width="4" filter="url(#shadow)"/>
+    <text x="28" y="42" font-family="monospace" font-size="15" font-weight="700" fill="#5f685f">FORMULÁRIO CLX-404</text>
+    <line x1="28" y1="61" x2="278" y2="61" stroke="#101713" stroke-width="2"/>
+    <text x="28" y="94" font-family="monospace" font-size="18" font-weight="900" fill="#101713">STATUS:</text>
+    <text x="28" y="126" font-family="monospace" font-size="17" fill="#101713">FAVOR AGUARDAR</text>
+    <text x="28" y="157" font-family="monospace" font-size="17" fill="#101713">SEM PREVISÃO</text>
+    <text x="28" y="188" font-family="monospace" font-size="17" fill="#101713">ENVIE NOVAMENTE</text>
+    <g transform="translate(157 101) rotate(-8)">
+      <rect x="0" y="0" width="174" height="70" rx="3" fill="#fffdf7" stroke="#b5332d" stroke-width="7"/>
+      <text x="87" y="47" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="900" fill="#b5332d">PENDENTE</text>
+    </g>
+  </g>
+
+  <g transform="translate(69 548)">
+    <rect width="580" height="42" rx="2" fill="#0d6b3a"/>
+    <text x="20" y="29" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="800" fill="#fffdf7">RELATOS REAIS. IRONIA NECESSÁRIA.</text>
+  </g>
+  <text x="1128" y="577" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="900" fill="#173f8f">consulixobrasil.com</text>
+  <text x="1128" y="598" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" fill="#5f685f">SITE INDEPENDENTE · NÃO OFICIAL</text>
+</svg>
