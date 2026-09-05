@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Consulixo</title>
+  <desc id="desc">Ícone do Consulixo em verde, amarelo e azul com carimbo vermelho.</desc>
+  <rect width="256" height="256" rx="52" fill="#0d6b3a"/>
+  <path d="M-12 135 128 36 268 135 128 234Z" fill="#f2d52e"/>
+  <circle cx="128" cy="135" r="64" fill="#173f8f"/>
+  <path d="M47 166 77 132l22 20 32-47 28 31 19-22 33 52Z" fill="#fffdf7" opacity=".92"/>
+  <rect x="43" y="66" width="170" height="66" rx="8" fill="#fffdf7" stroke="#101713" stroke-width="6" transform="rotate(-5 128 99)"/>
+  <text x="128" y="112" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="55" font-weight="900" letter-spacing="-3" fill="#101713" transform="rotate(-5 128 99)">CLX</text>
+  <g transform="rotate(-9 157 184)">
+    <rect x="91" y="154" width="132" height="52" rx="4" fill="#fffdf7" stroke="#b5332d" stroke-width="7"/>
+    <text x="157" y="188" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="900" fill="#b5332d">PENDENTE</text>
+  </g>
+</svg>
