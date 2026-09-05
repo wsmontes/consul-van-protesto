@@ -8,7 +8,11 @@ test('home exposes favicon and social sharing metadata for production domain', a
   assert.match(html, /property=["']og:title["']/i);
   assert.match(html, /property=["']og:description["']/i);
   assert.match(html, /property=["']og:url["'][^>]+https:\/\/consulixobrasil\.com\//i);
-  assert.match(html, /property=["']og:image["'][^>]+images\.weserv\.nl\/\?url=consulixobrasil\.com%2Fassets%2Fog-consulixo\.svg[^>]+output=jpg/i);
+  assert.match(html, /property=["']og:image["'][^>]+https:\/\/acjgeiavokkgodhhamak\.supabase\.co\/functions\/v1\/site-assets\/og\.png/i);
+  assert.match(html, /property=["']og:image:type["'][^>]+image\/png/i);
+  assert.match(html, /property=["']og:image:width["'][^>]+1200/i);
+  assert.match(html, /property=["']og:image:height["'][^>]+630/i);
   assert.match(html, /name=["']twitter:card["'][^>]+summary_large_image/i);
-  assert.match(html, /name=["']twitter:image["'][^>]+images\.weserv\.nl/i);
+  assert.match(html, /name=["']twitter:image["'][^>]+\/site-assets\/og\.png/i);
+  assert.doesNotMatch(html, /images\.weserv\.nl|og-consulixo\.svg/i);
 });
