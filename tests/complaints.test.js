@@ -27,6 +27,16 @@ test('validateComplaint accepts optional name and email when core fields are pre
   assert.deepEqual(result.errors, []);
 });
 
+test('validateComplaint rejects malformed optional email when provided', () => {
+  const result = validateComplaint({
+    service: 'passaporte',
+    description: 'Caso válido, e-mail inválido.',
+    email: 'abc',
+  });
+  assert.equal(result.valid, false);
+  assert.deepEqual(result.errors, ['email']);
+});
+
 test('normalizeComplaint removes personal display data without publication consent', () => {
   const normalized = normalizeComplaint({
     name: 'Maria da Silva',
