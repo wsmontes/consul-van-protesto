@@ -4,6 +4,8 @@ export function validateComplaint(input = {}) {
   const errors = [];
   if (!String(input.service ?? '').trim()) errors.push('service');
   if (!String(input.description ?? '').trim()) errors.push('description');
+  const email = String(input.email ?? '').trim();
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.push('email');
   return { valid: errors.length === 0, errors };
 }
 
