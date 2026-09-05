@@ -1,0 +1,10 @@
+{
+  "name": "consulixo-do-brasil-em-vancouver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check js/complaints.js && node --check js/app.js"
+  }
+}

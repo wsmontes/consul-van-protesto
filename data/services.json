@@ -1,0 +1,8 @@
+[
+  {"id":"passaporte","label":"Passaporte"},
+  {"id":"registro-civil","label":"Registro civil"},
+  {"id":"procuracao","label":"Procuração"},
+  {"id":"documentos","label":"Documentos / autenticação"},
+  {"id":"visto","label":"Visto / assuntos migratórios"},
+  {"id":"outros","label":"Outro"}
+]
