@@ -34,6 +34,17 @@ const fieldLabels = {
   email: 'e-mail',
 };
 
+function loadComplaintStyles() {
+  if (document.querySelector('link[data-complaint-styles]')) return;
+  const stylesheet = document.createElement('link');
+  stylesheet.rel = 'stylesheet';
+  stylesheet.href = 'complaints.css';
+  stylesheet.dataset.complaintStyles = 'true';
+  document.head.append(stylesheet);
+}
+
+loadComplaintStyles();
+
 const form = document.querySelector('#complaint-form');
 const list = document.querySelector('#complaints-list');
 const emptyState = document.querySelector('#empty-state');
