@@ -3,6 +3,7 @@ import {
   normalizeComplaint,
   filterComplaints,
   createProtocol,
+  formatComplaintDescription,
 } from './complaints.js';
 import { createComplaintApi } from './supabase.js';
 
@@ -54,19 +55,28 @@ function escapeHtml(value = '') {
 function renderComplaints() {
   if (!list || !emptyState) return;
   const items = filterComplaints(complaints, currentFilter);
-  list.innerHTML = items.map((item) => `
-    <article class="complaint-card">
-      <div class="complaint-card__meta">
-        <span>${escapeHtml(serviceLabels[item.service] || 'Outro')}</span>
-        <span>${escapeHtml(item.protocol)}</span>
-      </div>
-      <blockquote>“${escapeHtml(item.description)}”</blockquote>
-      <div class="complaint-card__bottom">
-        <span>${escapeHtml(item.displayName || 'Anônimo')}${item.waitTime ? ` · ${escapeHtml(waitLabels[item.waitTime] || item.waitTime)}` : ''}</span>
-        <span class="local-badge">PUBLICADO</span>
-      </div>
-    </article>
-  `).join('');
+  list.innerHTML = items.map((item) => {
+    const content = formatComplaintDescription(item.description);
+    const title = content.title ? `<h3 class="complaint-card__title">${content.title}</h3>` : '';
+    const paragraphs = content.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join('');
+
+    return `
+      <article class="complaint-card">
+        <div class="complaint-card__meta">
+          <span>${escapeHtml(serviceLabels[item.service] || 'Outro')}</span>
+          <span>${escapeHtml(item.protocol)}</span>
+        </div>
+        <div class="complaint-card__content">
+          ${title}
+          ${paragraphs}
+        </div>
+        <div class="complaint-card__bottom">
+          <span>${escapeHtml(item.displayName || 'Anônimo')}${item.waitTime ? ` · ${escapeHtml(waitLabels[item.waitTime] || item.waitTime)}` : ''}</span>
+          <span class="local-badge">PUBLICADO</span>
+        </div>
+      </article>
+    `;
+  }).join('');
   emptyState.hidden = items.length > 0;
 }
 
