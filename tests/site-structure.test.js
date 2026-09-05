@@ -22,6 +22,13 @@ test('home form includes requested complaint fields and consent', async () => {
   }
 });
 
+test('home explains central moderated publication instead of local preview', async () => {
+  const html = await text('index.html');
+  assert.match(html, /base central/i);
+  assert.match(html, /moderad/i);
+  assert.doesNotMatch(html, /salvo apenas neste navegador/i);
+});
+
 test('all pages carry an explicit independent non-official disclaimer', async () => {
   for (const page of ['index.html', 'privacidade.html', 'termos.html', 'contato.html']) {
     const html = await text(page);
@@ -37,10 +44,11 @@ test('stylesheet includes mobile behavior and reduced-motion support', async () 
   assert.match(css, /:focus-visible/i);
 });
 
-test('app connects the complaint module and local preview behavior', async () => {
+test('app connects the complaint module to Supabase and approved public data', async () => {
   const js = await text('js/app.js');
   assert.match(js, /normalizeComplaint/);
-  assert.match(js, /saveComplaint/);
-  assert.match(js, /filterComplaints/);
-  assert.match(js, /localStorage/);
+  assert.match(js, /createComplaintApi/);
+  assert.match(js, /listApproved/);
+  assert.match(js, /submit\(complaint\)/);
+  assert.doesNotMatch(js, /localStorage/);
 });
