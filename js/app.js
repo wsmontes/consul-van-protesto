@@ -2,10 +2,13 @@ import {
   validateComplaint,
   normalizeComplaint,
   filterComplaints,
-  saveComplaint,
-  loadComplaints,
   createProtocol,
 } from './complaints.js';
+import { createComplaintApi } from './supabase.js';
+
+const SUPABASE_URL = 'https://acjgeiavokkgodhhamak.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_dokMtF0DO0gDX1Pbvhy-3Q_SvbjokxM';
+const complaintApi = createComplaintApi({ url: SUPABASE_URL, key: SUPABASE_PUBLISHABLE_KEY });
 
 const serviceLabels = {
   passaporte: 'Passaporte',
@@ -37,6 +40,7 @@ const formError = document.querySelector('#form-error');
 const formSuccess = document.querySelector('#form-success');
 const filterButtons = [...document.querySelectorAll('[data-filter]')];
 let currentFilter = 'todos';
+let complaints = [];
 
 function escapeHtml(value = '') {
   return String(value)
@@ -49,7 +53,7 @@ function escapeHtml(value = '') {
 
 function renderComplaints() {
   if (!list || !emptyState) return;
-  const items = filterComplaints(loadComplaints(localStorage), currentFilter);
+  const items = filterComplaints(complaints, currentFilter);
   list.innerHTML = items.map((item) => `
     <article class="complaint-card">
       <div class="complaint-card__meta">
@@ -59,15 +63,26 @@ function renderComplaints() {
       <blockquote>“${escapeHtml(item.description)}”</blockquote>
       <div class="complaint-card__bottom">
         <span>${escapeHtml(item.displayName || 'Anônimo')}${item.waitTime ? ` · ${escapeHtml(waitLabels[item.waitTime] || item.waitTime)}` : ''}</span>
-        <span class="local-badge">PRÉVIA LOCAL</span>
+        <span class="local-badge">PUBLICADO</span>
       </div>
     </article>
   `).join('');
   emptyState.hidden = items.length > 0;
 }
 
+async function refreshComplaints() {
+  try {
+    complaints = await complaintApi.listApproved();
+    renderComplaints();
+  } catch (error) {
+    console.error(error);
+    complaints = [];
+    renderComplaints();
+  }
+}
+
 if (form) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     formError.hidden = true;
     formSuccess.hidden = true;
@@ -84,14 +99,24 @@ if (form) {
       return;
     }
 
-    const complaint = normalizeComplaint(values, createProtocol());
-    saveComplaint(complaint, localStorage);
-    form.reset();
-    formSuccess.innerHTML = `<strong>Relato registrado neste navegador.</strong> Protocolo ${escapeHtml(complaint.protocol)}. Nesta versão, nada foi enviado a um servidor nem publicado.`;
-    formSuccess.hidden = false;
-    currentFilter = 'todos';
-    filterButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.filter === 'todos'));
-    renderComplaints();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const complaint = normalizeComplaint(values, createProtocol());
+      await complaintApi.submit(complaint);
+      form.reset();
+      formSuccess.innerHTML = `<strong>Relato registrado para moderação.</strong> Protocolo ${escapeHtml(complaint.protocol)}. Ele só aparece publicamente depois de ser aprovado.`;
+      formSuccess.hidden = false;
+      currentFilter = 'todos';
+      filterButtons.forEach((button) => button.classList.toggle('is-active', button.dataset.filter === 'todos'));
+    } catch (error) {
+      console.error(error);
+      formError.textContent = 'Não foi possível registrar o relato agora. Tente novamente em instantes.';
+      formError.hidden = false;
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
 
@@ -112,4 +137,4 @@ if (counter) {
   counter.textContent = String(seed);
 }
 
-renderComplaints();
+refreshComplaints();
